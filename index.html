@@ -1103,7 +1103,7 @@
         // .textLetter text h2
         let indexText = 0;
         let textLetter = document.querySelector('.textLetter h2');
-        const textLetterH2 = "Gửi mẹ!";
+        const textLetterH2 = "Gửi mẹ💗";
         let timoutTextLetter;
 
         function textCharLetter() {
@@ -1131,7 +1131,7 @@
         // chữ của thư bạn muốn gửi
         let indexTextContent = 0;
         let textLetterContent = document.querySelector('.contentLetter');
-        const textLetterP = "Hôm nay là ngày 20-10-2025. Xin gửi lời chúc tới người con yêu thương nhất. Luôn vui vẻ, luôn hạnh phúc và luôn may mắn trong cuộc sống, ngày càng xinh đẹp. Xin gửi tất cả lời chúc tốt đẹp đến với mẹ. Love Mom💗";
+        const textLetterP = "Hôm nay là ngày 20-10-2025. Xin gửi lời chúc tới người con yêu thương nhất. Luôn vui vẻ, luôn hạnh phúc và luôn may mắn trong cuộc sống, ngày càng xinh đẹp. Xin gửi tất cả lời chúc tốt đẹp đến với mẹ. Love Mom💗💗💗";
         let timoutTextLetterContent;
         function textCharLetterContent() {
             if (indexTextContent < textLetterP.length) {
@@ -1243,7 +1243,69 @@
         });
 
     </script>
-    
+  <div id="text-click" style="display:none; cursor:pointer; color:blue;">
+    Click để ảnh xuất hiện
+</div>
+
+<script>
+// Thời gian delay trước khi xuất ảnh đầu tiên (ms)
+const startDelay = 1000; // 3 giây
+
+// Khoảng cách giữa các ảnh xuất hiện (ms)
+const gapBetweenImages = 1000; // 1 giây
+
+// Danh sách ảnh
+const images = [
+    "./image/1.jpg",
+    "./image/2.jpg",
+    "./image/3.jpg",
+    "./image/4.jpg",
+    "./image/5.jpg",
+    "./image/6.jpg",
+    "./image/7.jpg",
+];
+
+// Vị trí trung tâm
+const centerX = window.innerWidth / 2;
+const centerY = window.innerHeight / 2;
+
+// Bán kính vòng tròn
+const radius = 150;
+
+// Hiển thị text click (gọi sau khi thiệp hoặc chữ chạy xong)
+function showClickAfterCard() {
+    const textClick = document.getElementById('text-click');
+    textClick.style.display = 'block';
+}
+
+// Xử lý click để xuất ảnh
+document.getElementById('text-click').addEventListener('click', function() {
+    images.forEach((src, i) => {
+        setTimeout(() => {
+            const angle = (i / images.length) * 2 * Math.PI; // chia đều vòng tròn
+            const img = document.createElement('img');
+            img.src = src;
+            img.style.position = 'absolute';
+            img.style.width = '100px';
+            img.style.height = '100px';
+            img.style.left = `${centerX + radius * Math.cos(angle) - 50}px`; // căn giữa ảnh
+            img.style.top = `${centerY + radius * Math.sin(angle) - 50}px`;
+            img.style.opacity = 0;
+            img.style.transition = 'opacity 0.5s';
+            img.style.zIndex = 999;
+            document.body.appendChild(img);
+            setTimeout(() => { img.style.opacity = 1; }, 50);
+        }, startDelay + i * gapBetweenImages);
+    });
+
+    this.style.display = 'none'; // ẩn click sau khi bấm
+});
+
+// Ví dụ: gọi khi thiệp chạy xong
+// showClickAfterCard();
+</script>
+
 </body>
 
 </html>
+
